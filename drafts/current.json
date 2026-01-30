@@ -1,5 +1,48 @@
 {
-  "topic": "",
-  "materials": [],
+  "topic": "用 AI 给自己造了个「素材自动记录器」",
+  "materials": [
+    {
+      "time": "2026-01-30 14:00",
+      "content": "我跟 cc 说：我希望做任何事情，素材记录 skill 都能主动帮我记。cc 秒懂，给了三层方案：实时感知、会话收尾、每日沉淀。",
+      "type": "💡 意外发现",
+      "context": "需求提出",
+      "auto": false
+    },
+    {
+      "time": "2026-01-30 14:05",
+      "content": "我说要全套。cc 开始改文件：CLAUDE.md 加素材嗅觉规则、settings.local.json 加 Stop hook、skill 文件重写。一气呵成。",
+      "type": "🔄 迭代打磨",
+      "context": "方案落地",
+      "auto": false
+    },
+    {
+      "time": "2026-01-30 14:10",
+      "content": "我又加了三个需求：1. 素材统一存到指定文件夹 2. 方案过程也合并到 skill 里 3. 用 git 管理并同步 GitHub。cc 没废话，直接开干。",
+      "type": "🎯 方法沉淀",
+      "context": "需求追加",
+      "auto": false
+    },
+    {
+      "time": "2026-01-30 14:15",
+      "content": "我说要「独立仓库」和「mycc 子模块」同时存在。cc 用 submodule 方案搞定了，一个目录两种身份。",
+      "type": "💡 意外发现",
+      "context": "git 架构",
+      "auto": false
+    },
+    {
+      "time": "2026-01-30 14:20",
+      "content": "推送 mycc 时发现远程仓库被覆盖了（之前指向了 hardcore-tech-writer）。cc 问我要不要强推还是新建，我选新建。问题解决。",
+      "type": "🐛 踩坑翻车",
+      "context": "git 冲突",
+      "auto": false
+    },
+    {
+      "time": "2026-01-30 14:25",
+      "content": "从「我想要主动记录素材」到「两个 GitHub 仓库上线」，整个过程不到半小时。Learn in public 的第一步：把造工具的过程也记下来。",
+      "type": "✨ 突破时刻",
+      "context": "完成",
+      "auto": false
+    }
+  ],
   "created": "2026-01-30"
 }
