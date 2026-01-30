@@ -51,19 +51,13 @@ cc 开始改文件。
 
 cc 没废话，继续干。
 
-然后我又说：
-
-> "独立仓库和 mycc 子模块，我都要。"
-
-它用 submodule 方案搞定了。一个目录，两种身份。
-
 ---
 
 ## 踩了个坑
 
-推送 mycc 仓库时，发现远程被覆盖了。
+推送到 GitHub 时，发现远程仓库被覆盖了。
 
-之前指向了另一个项目，现在 pull 下来全是冲突。
+之前指向了另一个项目，pull 下来全是冲突。
 
 cc 问我：强推还是新建？
 
@@ -73,14 +67,9 @@ cc 问我：强推还是新建？
 
 ---
 
-## 半小时，两个仓库上线
+## 半小时，仓库上线
 
-从"我想要主动记录素材"到"两个 GitHub 仓库上线"：
-
-- **mycc**：私有仓库，存 Claude Code 配置和 skill
-- **ai-experience-log**：公开仓库，存素材和文章
-
-整个过程不到半小时。
+从"我想要主动记录素材"到 GitHub 仓库上线，整个过程不到半小时。
 
 ---
 
@@ -110,4 +99,12 @@ cc 问我：强推还是新建？
 
 ---
 
-*仓库地址：[ai-experience-log](https://github.com/OrangeViolin/ai-experience-log)*
+## 开源了
+
+这个工具是开源的，整个过程也是开源的。
+
+我每次记录完素材、出完稿，都会同步到 GitHub 仓库。公众号也会一起发。
+
+**仓库地址**：[ai-experience-log](https://github.com/OrangeViolin/ai-experience-log)
+
+欢迎关注，一起 Learn in Public。
