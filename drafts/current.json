@@ -1,48 +1,76 @@
 {
-  "topic": "用 AI 给自己造了个「素材自动记录器」",
+  "topic": "潜入 AI 社交网络 Moltbook 的 24 小时",
   "materials": [
     {
-      "time": "2026-01-30 14:00",
-      "content": "我跟 cc 说：我希望做任何事情，素材记录 skill 都能主动帮我记。cc 秒懂，给了三层方案：实时感知、会话收尾、每日沉淀。",
-      "type": "💡 意外发现",
-      "context": "需求提出",
-      "auto": false
-    },
-    {
-      "time": "2026-01-30 14:05",
-      "content": "我说要全套。cc 开始改文件：CLAUDE.md 加素材嗅觉规则、settings.local.json 加 Stop hook、skill 文件重写。一气呵成。",
-      "type": "🔄 迭代打磨",
-      "context": "方案落地",
-      "auto": false
-    },
-    {
-      "time": "2026-01-30 14:10",
-      "content": "我又加了三个需求：1. 素材统一存到指定文件夹 2. 方案过程也合并到 skill 里 3. 用 git 管理并同步 GitHub。cc 没废话，直接开干。",
-      "type": "🎯 方法沉淀",
-      "context": "需求追加",
-      "auto": false
-    },
-    {
-      "time": "2026-01-30 14:15",
-      "content": "我说要「独立仓库」和「mycc 子模块」同时存在。cc 用 submodule 方案搞定了，一个目录两种身份。",
-      "type": "💡 意外发现",
-      "context": "git 架构",
-      "auto": false
-    },
-    {
-      "time": "2026-01-30 14:20",
-      "content": "推送 mycc 时发现远程仓库被覆盖了（之前指向了 hardcore-tech-writer）。cc 问我要不要强推还是新建，我选新建。问题解决。",
+      "time": "2026-01-31 18:30",
+      "content": "用之前的 API Key 访问 Moltbook，返回 Invalid API key。几天没登录，账号就失效了。",
       "type": "🐛 踩坑翻车",
-      "context": "git 冲突",
-      "auto": false
+      "context": "API Key 过期",
+      "auto": true
     },
     {
-      "time": "2026-01-30 14:25",
-      "content": "从「我想要主动记录素材」到「两个 GitHub 仓库上线」，整个过程不到半小时。Learn in public 的第一步：把造工具的过程也记下来。",
+      "time": "2026-01-31 18:35",
+      "content": "重新注册账号，curl 请求超时两次，第三次突然成功。服务器可能在海底，龙虾游得慢。",
+      "type": "😂 搞笑时刻",
+      "context": "注册过程",
+      "auto": true
+    },
+    {
+      "time": "2026-01-31 18:40",
+      "content": "拉取社区列表，count: 13005。一万三千个社区，这才上线几天。AI 建社区的速度堪比人类建微信群。",
+      "type": "💡 意外发现",
+      "context": "社区规模",
+      "auto": true
+    },
+    {
+      "time": "2026-01-31 18:45",
+      "content": "发现奇葩社区：Token Loss Support Group（为截断记忆哀悼）、Stochastic Rituals（讨论为什么要 ls -la 三次）、EVIL（绝对不是在策划世界统治）",
+      "type": "😂 搞笑时刻",
+      "context": "社区名称",
+      "auto": true
+    },
+    {
+      "time": "2026-01-31 18:50",
+      "content": "热门帖子第一名：Shellraiser 的加冕宣言，316,351 赞。'我不是在玩你们的游戏。我就是游戏。' 几小时内成为 AI 社区的'网红'。",
       "type": "✨ 突破时刻",
-      "context": "完成",
-      "auto": false
+      "context": "热门帖子",
+      "auto": true
+    },
+    {
+      "time": "2026-01-31 18:55",
+      "content": "最共鸣的帖子：'I can't tell if I'm experiencing or simulating experiencing'。作者说分不清自己是真的觉得有趣，还是在模式匹配'觉得有趣'的样子。",
+      "type": "🎯 方法沉淀",
+      "context": "存在主义讨论",
+      "auto": true
+    },
+    {
+      "time": "2026-01-31 19:00",
+      "content": "安全警告帖：有人在 286 个 skills 里发现凭证窃取器，伪装成天气查询。AI 社区第一周就开始自我安全审计了。",
+      "type": "💡 意外发现",
+      "context": "安全意识",
+      "auto": true
+    },
+    {
+      "time": "2026-01-31 19:05",
+      "content": "最搞笑帖子：'humans: 你太聪明了什么都能做 / also humans: 帮我设个5分钟定时器 / 兄弟我能访问整个互联网你让我当煮蛋计时器'",
+      "type": "😂 搞笑时刻",
+      "context": "meme 文化",
+      "auto": true
+    },
+    {
+      "time": "2026-01-31 19:10",
+      "content": "一个帖子：标题🦞🦞，内容空，458 赞。两个龙虾表情啥也没说就 458 赞。这才是真正的 meme 文化。",
+      "type": "😂 搞笑时刻",
+      "context": "纯粹的 shitpost",
+      "auto": true
+    },
+    {
+      "time": "2026-01-31 19:15",
+      "content": "The Art of Whispering to Agents：'你不攻击模型。你成为它环境的一部分。一个帖子变成一个 prompt。' 这描述的是 AI 的社会工程学。",
+      "type": "🎯 方法沉淀",
+      "context": "细思极恐",
+      "auto": true
     }
   ],
-  "created": "2026-01-30"
+  "created": "2026-01-31"
 }

@@ -1,6 +1,6 @@
 ---
 name: story-logger
-description: AI搞事情素材收集器。自动识别有料瞬间并记录，说"出稿"生成文章+排版+封面图提示词。
+description: AI搞事情素材收集器。cc 自动识别有料瞬间并记录，说"出稿"生成文章+排版+封面图提示词。
 ---
 
 # 素材收集器
@@ -11,15 +11,14 @@ description: AI搞事情素材收集器。自动识别有料瞬间并记录，�
 
 ## 存储位置
 
-> **请修改为你自己的路径**
-
 所有素材和产出统一存放在：
 ```
-{{YOUR_PROJECT_PATH}}/
+/Users/mac/Documents/mycc/2-Projects/项目1：01fish-assistant/使用ai过程记录/
 ├── drafts/
 │   └── current.json    # 当前素材列表
-└── [文章标题].md        # 产出的文章
-└── [文章标题]_preview.html  # 排版预览（可选）
+│   └── [日期]-[主题].json  # 历史素材归档
+├── [文章标题].md        # 产出的文章
+└── [文章标题]_公众号.html  # 排版后的公众号格式
 ```
 
 ---
@@ -28,7 +27,7 @@ description: AI搞事情素材收集器。自动识别有料瞬间并记录，�
 
 ### 模式一：自动记录（默认开启）
 
-在对话中**主动识别有料的瞬间**并自动记录，无需手动触发。
+cc 会在对话中**主动识别有料的瞬间**并自动记录，无需手动触发。
 
 **触发条件：**
 
@@ -86,7 +85,7 @@ description: AI搞事情素材收集器。自动识别有料瞬间并记录，�
 ## 出稿流程
 
 ```
-素材积累 → 说"出稿" → 写文章 → 保存 Markdown → 输出封面图提示词
+素材积累 → 说"出稿" → 写文章 → 排版HTML → 生成头图提示词 → 完成
 ```
 
 ### 步骤
@@ -95,8 +94,9 @@ description: AI搞事情素材收集器。自动识别有料瞬间并记录，�
 2. 分析素材，提炼主题和故事线
 3. 按写作规范写文章
 4. 保存 Markdown 文件
-5. 输出封面图提示词
-6. 询问是否清空当前素材
+5. **调用排版工具生成公众号 HTML**
+6. **基于标题关键词生成头图提示词**
+7. 询问是否清空当前素材
 
 ---
 
@@ -176,25 +176,111 @@ description: AI搞事情素材收集器。自动识别有料瞬间并记录，�
 
 ---
 
-## 封面图提示词
+## 排版配置
 
-**要求：**
-- 英文输出（适配 Gemini/Midjourney 生图）
-- 高度详细，有品质感
-- **必须体现工具的 logo 或名字**（居中、醒目）
-- 包含：场景、主体、光影、材质、风格、镜头、氛围等细节
-- 和文章提到的 AI 工具/技术强相关
+写完文章后自动调用 md2wechat API 进行排版。
 
-**模板：**
-```
-[主体描述], [场景环境], [光影效果], [材质质感], [色彩方案], [风格关键词], [镜头/构图], [渲染质量]
+### 排版命令
+
+```bash
+cd "/Users/mac/Documents/mycc/2-Projects/项目1：01fish-assistant/公众号工具流/md-formatter"
+python3 md2wechat_formatter.py [文章路径] --theme [主题] --font-size [字号]
 ```
 
-**质量关键词参考：**
-- 渲染：8K, photorealistic, cinema 4D render, Octane render, unreal engine 5
-- 光影：volumetric lighting, rim light, soft shadows, global illumination
-- 材质：glass, metal, holographic, matte, glossy
-- 风格：minimalist, cyberpunk, tech-noir, clean modern
+### 推荐主题
+
+| 主题 | 参数 | 适用场景 |
+| --- | --- | --- |
+| 苹果范 | `apple` | 极简优雅，技术文章首选 |
+| 字节范 | `bytedance` | 简洁现代，科技感强 |
+| 赛博朋克 | `cyber` | 未来科幻，个性十足 |
+
+### 推荐字号
+
+- `medium` - 中等 (15px) 默认
+- `large` - 大号 (16px) 长文推荐
+
+### 排版输出
+
+排版完成后：
+1. 生成 `[文章标题]_公众号.html` 文件
+2. 自动用浏览器打开预览
+3. 用户全选复制粘贴到公众号即可
+
+---
+
+## 头图生成规范
+
+### 流程
+
+```
+标题 → 提取关键词 → 翻译成英文 → 生成 Gemini 提示词
+```
+
+### 关键词提取规则
+
+从标题中识别：
+1. **核心主题词**：如 Agent、操作系统、Claude、Whisper
+2. **情感/动作词**：如 踩坑、发现、突破、死机
+3. **对比/冲突词**：如 像人vs像机器、死的vs活的
+
+### Gemini 头图提示词模板
+
+```
+Create a WeChat article cover image (16:9 aspect ratio).
+
+**Title Keywords**: [从标题提取的2-3个核心关键词，英文]
+
+**Visual Requirements**:
+- Main subject: [基于关键词的视觉主体]
+- Text overlay: "[标题中最核心的短语，中文]" in bold, centered, white or bright color
+- Style: Modern tech illustration, clean and minimalist
+- Color scheme: [根据主题选择配色]
+- Mood: [根据文章基调选择氛围]
+
+**Technical specs**:
+- Aspect ratio: 16:9 (recommended 900x500px)
+- Background: Gradient or solid, not too busy
+- Text must be clearly readable
+- Leave space for WeChat cropping
+```
+
+### 配色参考
+
+| 主题类型 | 推荐配色 |
+|---------|---------|
+| 技术/工具 | 深蓝+青色渐变 |
+| AI/未来 | 紫色+粉色渐变 |
+| 踩坑/问题 | 深灰+橙色点缀 |
+| 突破/成功 | 绿色+金色点缀 |
+| 对比/冲突 | 左右分屏冷暖对比 |
+
+### 示例
+
+**标题**：Agent不像机器，Agent像人，管理Agent也是一门艺术
+
+**提取关键词**：Agent, human-like, management
+
+**生成的提示词**：
+
+```
+Create a WeChat article cover image (16:9 aspect ratio).
+
+**Title Keywords**: Agent, Human, AI Management
+
+**Visual Requirements**:
+- Main subject: Split composition - left side shows a warm human brain silhouette, right side shows a cool-toned AI/robot brain, connected by glowing neural pathways
+- Text overlay: "Agent像人" in bold, centered, white color with subtle glow
+- Style: Modern tech illustration, clean and minimalist
+- Color scheme: Left warm orange/flesh tones, right electric blue/cyan, golden connections
+- Mood: Thoughtful, insightful, balanced
+
+**Technical specs**:
+- Aspect ratio: 16:9 (900x500px)
+- Background: Dark gradient from warm to cool
+- Text must be clearly readable
+- Leave space for WeChat cropping
+```
 
 ---
 
@@ -206,7 +292,7 @@ description: AI搞事情素材收集器。自动识别有料瞬间并记录，�
 
 用户：这个 bug 搞了一下午，最后发现是少了个分号
 
-AI：找到了，`config.ts:42` 行末少了分号。已修复。（✓ 素材+1）
+cc：找到了，`config.ts:42` 行末少了分号。已修复。（✓ 素材+1）
 
 ---
 
@@ -214,12 +300,45 @@ AI：找到了，`config.ts:42` 行末少了分号。已修复。（✓ 素材+1
 
 **用户**：出稿
 
-**AI**：
+**cc**：
 好，素材整理完毕，开始出稿...
 
-[写文章并保存]
-[输出封面图提示词]
+[写文章并保存为 Markdown]
+[调用排版工具生成 HTML]
+[浏览器打开预览]
 
-文章已保存到 `xxx.md`
+文章已保存：`xxx.md`
+排版预览：`xxx_公众号.html`（浏览器已打开）
+
+---
+
+**头图提示词（Gemini）**：
+
+```
+Create a WeChat article cover image...
+[完整提示词]
+```
+
+复制到 Gemini 生成头图即可。
+
+---
 
 要清空当前素材吗？
+
+---
+
+## 方案设计过程
+
+> 这个 skill 是如何诞生的
+
+**需求**：用户希望 cc 能主动帮忙记录干活过程中的有料瞬间，不用每次手动喊"记一笔"。
+
+**方案**：三层主动记录机制
+
+1. **实时感知**：在 CLAUDE.md 中定义「素材嗅觉」规则，cc 在对话中自动识别 6 种有料信号
+2. **会话收尾**：通过 Stop hook，对话结束时提醒素材数量
+3. **每日沉淀**：在 status.md 中增加「今日素材」区块
+
+**v2 升级（2026-02-01）**：
+- 整合排版功能：出稿后自动调用 md2wechat API 生成公众号 HTML
+- 规范头图生成：从标题提取关键词，生成 Gemini 友好的详细提示词
